@@ -39,6 +39,10 @@ const sendNotification = (s, dataToSend) => {
   dummyDb.subscription.forEach(sub => webpush.sendNotification(sub, dataToSend))
 }
 
+app.get('/', () => {
+  res.json({ message: "it's alive!" })
+})
+
 //route to test send notification
 app.get('/send-notification', (req, res) => {
   console.log('- vapidKeys : "', vapidKeys, '";')
