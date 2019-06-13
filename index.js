@@ -5,7 +5,7 @@ const webpush = require('web-push')
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
-const port = 4000
+const port = 3000
 app.get('/', (req, res) => res.send('Hello World!'))
 const dummyDb = { subscription: [] } //dummy in memory store
 const saveToDatabase = async subscription => {
@@ -35,6 +35,7 @@ webpush.setVapidDetails(
 
 //function to send the notification to the subscribed device
 const sendNotification = (s, dataToSend) => {
+  console.log('send notification!')
   dummyDb.subscription.forEach(sub => webpush.sendNotification(sub, dataToSend))
 }
 
@@ -49,6 +50,7 @@ app.get('/send-notification', (req, res) => {
 
 //route to test send notification
 app.get('/reset-keys', (req, res) => {
+  console.log('/reset-keys')
   dummyDb = { subscription: [] }
 })
 
